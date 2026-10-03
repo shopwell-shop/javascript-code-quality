@@ -1,0 +1,46 @@
+name: Publish
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: "pnpm"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Update npm
+        run: npm install -g npm@latest
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Set version of all packages
+        run: pnpm -r exec -- pnpm version ${GITHUB_REF_NAME#v} --no-git-tag-version --allow-same-version
+
+      - name: Include notices in packages
+        run: |
+          cp NOTICE packages/admin-eslint-rules/NOTICE
+          cp NOTICE packages/admin-stylelint-rules/NOTICE
+          cp NOTICE packages/storefront-eslint-rules/NOTICE
+
+      - name: Publish packages
+        run: pnpm -r publish --no-git-checks --access public
+        env:
+          NPM_CONFIG_PROVENANCE: true
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
