@@ -1,0 +1,30 @@
+{
+	"name": "@shopwell-ag/storefront-eslint-rules",
+	"version": "1.0.0",
+	"description": "Shopwell Storefront ESLint rules",
+	"license": "Apache-2.0",
+	"author": "Shopwell",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/shopwell-shop/javascript-code-quality.git",
+		"directory": "packages/storefront-eslint-rules"
+	},
+	"type": "module",
+	"main": "index.js",
+	"exports": {
+		".": {
+			"import": "./index.js",
+			"require": "./index.js"
+		}
+	},
+	"scripts": {
+		"test": "vitest run"
+	},
+	"devDependencies": {
+		"eslint": "catalog:",
+		"vitest": "catalog:"
+	},
+	"peerDependencies": {
+		"eslint": "catalog:"
+	}
+}

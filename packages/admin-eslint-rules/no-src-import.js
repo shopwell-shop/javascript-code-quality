@@ -1,0 +1,28 @@
+export default {
+	meta: {
+		type: "problem",
+		docs: {
+			description: "Forbid imports directly from the Shopwell Core via @administration/",
+			category: "Best Practices",
+			recommended: true,
+		},
+		schema: [],
+	},
+	create(context) {
+		return {
+			ImportDeclaration(node) {
+				const invalidNodeSources = [];
+				invalidNodeSources.push(node.source.value.startsWith("@administration/"));
+
+				if (invalidNodeSources.includes(true)) {
+					context.report({
+						loc: node.source.loc.start,
+						message: `\
+You can't use imports directly from the Shopwell Core via "${node.source.value}". \
+Use the global Shopwell object directly instead (https://developer.shopwell.cn/docs/guides/plugins/plugins/administration/the-shopwell-object)`,
+					});
+				}
+			},
+		};
+	},
+};

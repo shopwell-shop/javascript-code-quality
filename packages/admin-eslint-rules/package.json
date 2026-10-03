@@ -1,0 +1,43 @@
+{
+	"name": "@shopwell-ag/admin-eslint-rules",
+	"version": "1.0.1",
+	"description": "Shopwell Administration ESLint rules",
+	"keywords": [
+		"eslint",
+		"eslint-plugin",
+		"eslint-rules",
+		"shopwell"
+	],
+	"homepage": "https://github.com/shopwell-shop/javascript-code-quality/tree/main/packages/admin-eslint-rules#readme",
+	"bugs": {
+		"url": "https://github.com/shopwell-shop/javascript-code-quality/issues"
+	},
+	"license": "Apache-2.0",
+	"author": "Shopwell",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/shopwell-shop/javascript-code-quality.git",
+		"directory": "packages/admin-eslint-rules"
+	},
+	"type": "module",
+	"main": "index.js",
+	"exports": {
+		".": {
+			"import": "./index.js",
+			"require": "./index.js"
+		}
+	},
+	"scripts": {
+		"test": "vitest run"
+	},
+	"dependencies": {
+		"compare-versions": "^6.1.1"
+	},
+	"devDependencies": {
+		"eslint": "catalog:",
+		"vitest": "^4.0.1"
+	},
+	"peerDependencies": {
+		"eslint": "catalog:"
+	}
+}
